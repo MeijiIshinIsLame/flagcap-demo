@@ -32,6 +32,12 @@ html, body {
   align-items: flex-end
 }
 
+.ap {
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 48px;
+}
+
 label {
   display: block;
   font-weight: bold;

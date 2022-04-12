@@ -140,13 +140,6 @@ function getRandomSafeSpot() {
     }, randomFromArray(coinTimeouts));
   }
 
-  function handleAP() {
-    if (players[playerId].ap < 0) {
-      players[playerId].ap = 0;
-    }
-    document.querySelector(".ap").innerText = `AP: ${players[playerId].ap}`;
-  }
-
   function attemptGrabCoin(x, y) {
     const key = getKeyString(x, y);
     if (coins[key]) {
@@ -166,9 +159,6 @@ function getRandomSafeSpot() {
       //move to the next space
       players[playerId].x = newX;
       players[playerId].y = newY;
-      if (players[playerId].ap < 1) {
-        return
-      }
       if (xChange === 1) {
         players[playerId].direction = "right";
       }
@@ -177,8 +167,6 @@ function getRandomSafeSpot() {
       }
       playerRef.set(players[playerId]);
       attemptGrabCoin(newX, newY);
-      players[playerId].ap -= 1;
-      handleAP();
     }
   }
 
@@ -296,7 +284,6 @@ function getRandomSafeSpot() {
 
     //Place my first coin
     placeCoin();
-    handleAP();
 
   }
 
@@ -309,7 +296,6 @@ function getRandomSafeSpot() {
 
       const name = createName();
       playerNameInput.value = name;
-      const ap = 50;
 
       const {x, y} = getRandomSafeSpot();
 
@@ -322,7 +308,6 @@ function getRandomSafeSpot() {
         x,
         y,
         coins: 0,
-        ap,
       })
 
       //Remove me from Firebase when I diconnect
